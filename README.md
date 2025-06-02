@@ -64,7 +64,7 @@ The application includes comprehensive monitoring with the following key metrics
 
 2. **`predict_input_feature_count_bucket`**
    - Histogram tracking distribution of input features
-   - Validates correct feature size (expected: 57 features)
+   - Validates correct feature size (expected: 63 features)
    - Identifies malformed input requests
 
 3. **`predict_input_feature_count_sum`**
@@ -75,7 +75,7 @@ The application includes comprehensive monitoring with the following key metrics
 ### Key Insights from Metrics
 
 - **Service Health**: Steadily increasing trends confirm active service
-- **Input Validation**: Most requests should hit the highest bucket (57 features)
+- **Input Validation**: Most requests should hit the highest bucket (63 features)
 - **Performance Monitoring**: Sudden spikes may indicate batch predictions or testing
 - **Error Detection**: Flat lines or drops signal potential endpoint issues
 
@@ -131,7 +131,7 @@ The application includes comprehensive monitoring with the following key metrics
 - **POST** `/predict` - Hand gesture prediction
   ```json
   {
-    "features": [/* 57 landmark coordinates */]
+    "features": [/* 63 landmark coordinates */]
   }
   ```
 
@@ -198,7 +198,7 @@ HOST=0.0.0.0
 
 # Model Configuration
 MODEL_PATH=./model/
-FEATURE_COUNT=57
+FEATURE_COUNT=63
 
 # Monitoring
 PROMETHEUS_PORT=9090
@@ -214,7 +214,7 @@ GRAFANA_PORT=3000
    - Check model compatibility with current TensorFlow/PyTorch version
 
 2. **Feature Count Mismatch**
-   - Verify input contains exactly 57 features
+   - Verify input contains exactly 63 features
    - Check hand landmark extraction pipeline
 
 3. **Metrics Not Updating**
