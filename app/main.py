@@ -10,6 +10,7 @@ import numpy as np
 import time
 from datetime import datetime
 import logging
+import os
 from contextlib import asynccontextmanager
 import psutil
 from prometheus_client import Counter, Histogram, Gauge, generate_latest, CONTENT_TYPE_LATEST
@@ -251,6 +252,16 @@ async def general_exception_handler(request, exc: Exception):
         content={"error": "Internal server error", "detail": str(exc)}
     )
 
+# -------------- RAILWAY DEPLOYMENT FIX --------------
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    
+    # Get port from environment variable (Railway sets this automatically)
+    port = int(os.environ.get("PORT", 8000))
+    
+    # Run the server with Railway-compatible settings
+    uvicorn.run(
+        app, 
+        host="0.0.0.0",  # Railway requires binding to 0.0.0.0
+        port=port        # Use Railway's assigned port
+    )
